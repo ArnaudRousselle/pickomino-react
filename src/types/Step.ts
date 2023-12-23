@@ -3,5 +3,5 @@ export type Step =
   | {
       type: "playerTurn";
       playerId: number;
-      subStep: "mustLaunchDice" | "mustChooseDiceValue";
+      subStep: "mustLaunchDiceOrTakeWorm" | "mustChooseDiceValue";
     };

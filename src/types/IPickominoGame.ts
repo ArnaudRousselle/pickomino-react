@@ -1,7 +1,8 @@
 import { BarbecueWorm, Dice, Step } from ".";
+import { PlayerType } from "./PlayerType";
 
 export interface IPickominoGame {
-  players: { id: number; name: string; barbecueWormsStack: BarbecueWorm[] }[];
+  players: PlayerType[];
   barbecueWorms: Array<
     BarbecueWorm & {
       isDisabled: boolean;

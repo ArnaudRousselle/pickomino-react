@@ -10,7 +10,7 @@ export const Players = () => {
     <div>
       {players.map((p) => (
         <div key={p.id}>
-          <Player playerId={p.id} name={p.name} />
+          <Player {...p} />
         </div>
       ))}
     </div>

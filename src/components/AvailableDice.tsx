@@ -7,10 +7,9 @@ export const AvailableDice = () => {
   } = useContext(PickominoContext);
   return (
     <div>
-      {availableDice.map((d, i) => (
-        <div key={i}>
-          Dice {i + 1}: {d.value ?? "non lancé"}
-        </div>
+      <h2>Dès disponibles</h2>
+      {availableDice.map(({ id, value }) => (
+        <div key={id}>{value}</div>
       ))}
     </div>
   );

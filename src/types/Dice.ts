@@ -1,3 +1,3 @@
 import { DiceValue } from ".";
 
-export type Dice = { value: DiceValue };
+export type Dice = { id: number; value: DiceValue };
