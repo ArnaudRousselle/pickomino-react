@@ -9,7 +9,8 @@ export const BarbecueWorms = () => {
     <div>
       {barbecueWorms.map((b) => (
         <span key={b.value}>
-          {b.value} ({b.wormsCount} worm{b.wormsCount >= 2 ? "s" : ""})
+          {b.value} {b.isDisabled ? "D" : ""} ({b.wormsCount} worm
+          {b.wormsCount >= 2 ? "s" : ""})
         </span>
       ))}
     </div>

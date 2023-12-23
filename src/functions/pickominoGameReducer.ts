@@ -181,6 +181,54 @@ export function pickominoGameReducer(
         selectedDice: [],
       };
     }
+
+    case "quitMyTurn": {
+      if (
+        !(
+          game.currentStep.type === "playerTurn" &&
+          game.currentStep.subStep === "mustChooseDiceValue"
+        )
+      ) {
+        console.warn("Mauvaise action");
+        return game;
+      }
+      const currentPlayerId = game.currentStep.playerId;
+
+      const wormAtTop = game.players
+        .find((p) => p.id === currentPlayerId)
+        ?.barbecueWormsStack.find((_, i) => i === 0);
+
+      return {
+        ...game,
+        players: game.players.map((player) => ({
+          ...player,
+          barbecueWormsStack:
+            player.id === currentPlayerId
+              ? player.barbecueWormsStack.slice(1)
+              : player.barbecueWormsStack,
+        })),
+        barbecueWorms: wormAtTop
+          ? [...game.barbecueWorms, { ...wormAtTop, isDisabled: false }]
+              .sort((a, b) => a.value - b.value)
+              .map((bw, index, arr) => ({
+                ...bw,
+                isDisabled:
+                  index === arr.length - 1 && bw.value !== wormAtTop.value,
+              }))
+          : game.barbecueWorms,
+        currentStep: {
+          type: "playerTurn",
+          playerId:
+            game.players[
+              (game.players.findIndex((p) => p.id === currentPlayerId) + 1) %
+                game.players.length
+            ].id,
+          subStep: "mustLaunchDiceOrTakeWorm",
+        },
+        availableDice: defaultDice,
+        selectedDice: [],
+      };
+    }
   }
   return game;
 }

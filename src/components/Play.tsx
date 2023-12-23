@@ -59,7 +59,11 @@ export const Play = () => {
       );
     }
     if (currentStep.subStep === "mustChooseDiceValue") {
-      const { availableDice, selectedDice } = game;
+      const { availableDice, selectedDice, players } = game;
+
+      const wormAtTop = players
+        .find((p) => p.id === currentStep.playerId)
+        ?.barbecueWormsStack.find((_, i) => i === 0);
 
       const dice = availableDice
         .filter((d) => !selectedDice.some((sd) => sd.value === d.value))
@@ -75,6 +79,16 @@ export const Play = () => {
           const valueB = b.value === "worm" ? 6 : b.value;
           return valueA - valueB;
         });
+
+      if (dice.length === 0) {
+        return (
+          <button type="button" onClick={() => play({ type: "quitMyTurn" })}>
+            {wormAtTop
+              ? "Replacer le pikomino " + wormAtTop.value
+              : "Abandonner"}
+          </button>
+        );
+      }
 
       return dice.map((d) => (
         <button

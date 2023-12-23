@@ -6,4 +6,5 @@ export type Action =
     }
   | { type: "chooseDiceValue"; chosenDiceValue: DiceValue }
   | { type: "takeWormFromBarbecueWorm" }
-  | { type: "takeWormFromPlayer" };
+  | { type: "takeWormFromPlayer" }
+  | { type: "quitMyTurn" };
