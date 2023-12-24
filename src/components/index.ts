@@ -1,6 +1,6 @@
 export * from "./AvailableDice";
 export * from "./BarbecueWorms";
-export * from "./CurrentStep";
+export * from "./EndOfGameSummary";
 export * from "./Pickomino";
 export * from "./Play";
 export * from "./Player";

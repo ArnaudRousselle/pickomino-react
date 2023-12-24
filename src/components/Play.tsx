@@ -5,8 +5,10 @@ export const Play = () => {
   const { game, play } = useContext(PickominoContext);
   const { currentStep } = game;
 
-  if (currentStep.type === "playerTurn") {
-    if (currentStep.subStep === "mustLaunchDiceOrTakeWorm") {
+  if (currentStep.type !== "playerTurn") return null;
+
+  switch (currentStep.subStep) {
+    case "mustLaunchDiceOrTakeWorm": {
       const { selectedDice, barbecueWorms, players } = game;
 
       const totalPoints = selectedDice.reduce(
@@ -58,7 +60,8 @@ export const Play = () => {
         </>
       );
     }
-    if (currentStep.subStep === "mustChooseDiceValue") {
+
+    case "mustChooseDiceValue": {
       const { availableDice, selectedDice, players } = game;
 
       const wormAtTop = players
@@ -102,6 +105,8 @@ export const Play = () => {
         </button>
       ));
     }
+
+    default:
+      return null;
   }
-  return null;
 };

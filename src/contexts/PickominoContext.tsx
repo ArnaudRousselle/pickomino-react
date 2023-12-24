@@ -7,7 +7,7 @@ export const PickominoContext = createContext<IPickominoContext>({
     barbecueWorms: [],
     availableDice: [],
     selectedDice: [],
-    currentStep: { type: "none" },
+    currentStep: { type: "endOfGame" },
   },
   play: () => {},
 });

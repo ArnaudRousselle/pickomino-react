@@ -91,6 +91,12 @@ export function pickominoGameReducer(
         return game;
       }
 
+      const newBarbecueWorms = game.barbecueWorms.filter(
+        (bw) => bw.value !== selectedWorm.value
+      );
+
+      const endOfGame = !newBarbecueWorms.some((bw) => !bw.isDisabled);
+
       return {
         ...game,
         players: game.players.map((player) => ({
@@ -100,18 +106,19 @@ export function pickominoGameReducer(
               ? [selectedWorm, ...player.barbecueWormsStack]
               : player.barbecueWormsStack,
         })),
-        barbecueWorms: game.barbecueWorms.filter(
-          (bw) => bw.value !== selectedWorm.value
-        ),
-        currentStep: {
-          type: "playerTurn",
-          playerId:
-            game.players[
-              (game.players.findIndex((p) => p.id === currentPlayerId) + 1) %
-                game.players.length
-            ].id,
-          subStep: "mustLaunchDiceOrTakeWorm",
-        },
+        barbecueWorms: newBarbecueWorms,
+        currentStep: !endOfGame
+          ? {
+              type: "playerTurn",
+              playerId:
+                game.players[
+                  (game.players.findIndex((p) => p.id === currentPlayerId) +
+                    1) %
+                    game.players.length
+                ].id,
+              subStep: "mustLaunchDiceOrTakeWorm",
+            }
+          : { type: "endOfGame" },
         availableDice: defaultDice,
         selectedDice: [],
       };
@@ -198,6 +205,16 @@ export function pickominoGameReducer(
         .find((p) => p.id === currentPlayerId)
         ?.barbecueWormsStack.find((_, i) => i === 0);
 
+      const newBarbecueWorms = wormAtTop
+        ? [...game.barbecueWorms, { ...wormAtTop, isDisabled: false }].sort(
+            (a, b) => a.value - b.value
+          )
+        : game.barbecueWorms;
+
+      const maxPikomino = newBarbecueWorms
+        .filter((bw) => !bw.isDisabled && wormAtTop !== undefined)
+        .find((_, index, arr) => index === arr.length - 1);
+
       return {
         ...game,
         players: game.players.map((player) => ({
@@ -207,15 +224,13 @@ export function pickominoGameReducer(
               ? player.barbecueWormsStack.slice(1)
               : player.barbecueWormsStack,
         })),
-        barbecueWorms: wormAtTop
-          ? [...game.barbecueWorms, { ...wormAtTop, isDisabled: false }]
-              .sort((a, b) => a.value - b.value)
-              .map((bw, index, arr) => ({
-                ...bw,
-                isDisabled:
-                  index === arr.length - 1 && bw.value !== wormAtTop.value,
-              }))
-          : game.barbecueWorms,
+        barbecueWorms: newBarbecueWorms.map((bw) => ({
+          ...bw,
+          isDisabled:
+            bw.isDisabled ||
+            (maxPikomino?.value === bw.value &&
+              maxPikomino?.value !== wormAtTop?.value),
+        })),
         currentStep: {
           type: "playerTurn",
           playerId:
