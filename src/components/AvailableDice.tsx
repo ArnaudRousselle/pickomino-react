@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { PickominoContext } from "../contexts";
+import { mapDiceValueToImgSrc } from "../functions";
 
 export const AvailableDice = () => {
   const {
@@ -9,7 +10,12 @@ export const AvailableDice = () => {
     <div>
       <h2>Dès disponibles</h2>
       {availableDice.map(({ id, value }) => (
-        <div key={id}>{value}</div>
+        <img
+          key={id}
+          width="48px"
+          src={mapDiceValueToImgSrc(value)}
+          alt={value.toString()}
+        />
       ))}
     </div>
   );

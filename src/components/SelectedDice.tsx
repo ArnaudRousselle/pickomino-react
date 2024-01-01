@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { PickominoContext } from "../contexts";
+import { mapDiceValueToImgSrc } from "../functions";
 
 export const SelectedDice = () => {
   const {
@@ -9,7 +10,12 @@ export const SelectedDice = () => {
     <div>
       <h2>Dès sélectionnés</h2>
       {selectedDice.map(({ id, value }) => (
-        <div key={id}>{value}</div>
+        <img
+          key={id}
+          width="48px"
+          src={mapDiceValueToImgSrc(value)}
+          alt={value.toString()}
+        />
       ))}
       <h2>
         Total points :{" "}

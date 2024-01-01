@@ -6,3 +6,4 @@ export * from "./IPickominoContext";
 export * from "./IPickominoGame";
 export * from "./PlayerType";
 export * from "./Step";
+export * from "./WormValue";

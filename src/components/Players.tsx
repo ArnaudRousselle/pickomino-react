@@ -9,9 +9,7 @@ export const Players = () => {
   return (
     <div>
       {players.map((p) => (
-        <div key={p.id}>
-          <Player {...p} />
-        </div>
+        <Player key={p.id} {...p} />
       ))}
     </div>
   );

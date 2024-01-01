@@ -123,8 +123,8 @@ export const Pickomino = () => {
 
   return (
     <PickominoContext.Provider value={{ game, play }}>
-      <Players />
       <BarbecueWorms />
+      <Players />
       <AvailableDice />
       <SelectedDice />
       <Play />
