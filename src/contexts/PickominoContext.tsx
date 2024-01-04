@@ -9,5 +9,5 @@ export const PickominoContext = createContext<IPickominoContext>({
     selectedDice: [],
     currentStep: { type: "endOfGame" },
   },
-  play: () => {},
+  actions: [],
 });

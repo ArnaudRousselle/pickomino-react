@@ -8,7 +8,7 @@ import {
 } from ".";
 import { defaultDice } from "../constants";
 import { PickominoContext } from "../contexts";
-import { pickominoGameReducer } from "../functions";
+import { pickominoActionsCreator, pickominoGameReducer } from "../functions";
 import { SelectedDice } from "./SelectedDice";
 
 export const Pickomino = () => {
@@ -122,7 +122,9 @@ export const Pickomino = () => {
   });
 
   return (
-    <PickominoContext.Provider value={{ game, play }}>
+    <PickominoContext.Provider
+      value={{ game, actions: pickominoActionsCreator(game, play) }}
+    >
       <BarbecueWorms />
       <Players />
       <AvailableDice />

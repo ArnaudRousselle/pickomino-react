@@ -4,6 +4,7 @@ export * from "./Dice";
 export * from "./DiceValue";
 export * from "./IPickominoContext";
 export * from "./IPickominoGame";
+export * from "./PlayAction";
 export * from "./PlayerType";
 export * from "./Step";
 export * from "./WormValue";
