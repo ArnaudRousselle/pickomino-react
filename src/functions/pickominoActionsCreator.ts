@@ -1,9 +1,6 @@
-import { Action, IPickominoGame, PlayAction } from "../types";
+import { IPickominoGame, PlayAction } from "../types";
 
-export function pickominoActionsCreator(
-  game: IPickominoGame,
-  play: React.Dispatch<Action>
-): PlayAction[] {
+export function pickominoActionsCreator(game: IPickominoGame): PlayAction[] {
   const { currentStep } = game;
 
   if (currentStep.type !== "playerTurn") return [];
@@ -35,27 +32,20 @@ export function pickominoActionsCreator(
         }))
         .find((p) => p.availableWormValue === totalPoints);
 
-      const actions = [
-        {
-          play: () => play({ type: "launchDice" }),
-          infos: { text: "lancer les dés" },
-        },
+      const actions: PlayAction[] = [
+        { type: "launchDice", text: "Lancer les dés" },
       ];
 
       if (wormAvailableFromBarbecue)
         actions.push({
-          play: () => play({ type: "takeWormFromBarbecueWorm" }),
-          infos: {
-            text: `Prendre le jeton ${wormAvailableFromBarbecue.value} dans la brochette`,
-          },
+          type: "takeWormFromBarbecueWorm",
+          text: `Prendre le jeton ${wormAvailableFromBarbecue.value} dans la brochette`,
         });
 
       if (wormAvailableFromPlayer)
         actions.push({
-          play: () => play({ type: "takeWormFromPlayer" }),
-          infos: {
-            text: `Prendre le jeton ${wormAvailableFromPlayer.availableWormValue} chez ${wormAvailableFromPlayer.playerName}`,
-          },
+          type: "takeWormFromPlayer",
+          text: `Prendre le jeton ${wormAvailableFromPlayer.availableWormValue} chez ${wormAvailableFromPlayer.playerName}`,
         });
 
       return actions;
@@ -84,25 +74,19 @@ export function pickominoActionsCreator(
           .find((p) => p.id === currentStep.playerId)
           ?.barbecueWormsStack.find((_, i) => i === 0);
 
-        if (wormAtTop)
-          return [
-            {
-              play: () => play({ type: "quitMyTurn" }),
-              infos: { text: `Replacer le pikomino ${wormAtTop.value}` },
-            },
-          ];
-        else
-          return [
-            {
-              play: () => play({ type: "quitMyTurn" }),
-              infos: { text: "Abandonner" },
-            },
-          ];
+        return [
+          {
+            type: "quitMyTurn",
+            text: wormAtTop
+              ? `Replacer le pikomino ${wormAtTop.value}`
+              : "Abandonner",
+          },
+        ];
       } else
         return dice.map((d) => ({
-          play: () =>
-            play({ type: "chooseDiceValue", chosenDiceValue: d.value }),
-          infos: { text: `Prendre la valeur ${d.value} (x${d.occurences})` },
+          type: "chooseDiceValue",
+          chosenDiceValue: d.value,
+          text: `Prendre la valeur ${d.value} (x${d.occurences})`,
         }));
     }
 

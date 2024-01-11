@@ -1,4 +1,3 @@
-export type PlayAction = {
-  infos: { text: string }; //todo ARNAUD: à compléter
-  play: () => void;
-};
+import { Action } from ".";
+
+export type PlayAction = Action & { text: string };
