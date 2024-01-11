@@ -117,7 +117,7 @@ export const Pickomino = () => {
 
   return (
     <PickominoContext.Provider
-      value={{ game, actions: pickominoActionsCreator(game) }}
+      value={{ game, actions: pickominoActionsCreator(game), play }}
     >
       <div style={{ height: "25%" }}>
         <BarbecueWorms />

@@ -10,4 +10,5 @@ export const PickominoContext = createContext<IPickominoContext>({
     currentStep: { type: "endOfGame" },
   },
   actions: [],
+  play: () => {},
 });
