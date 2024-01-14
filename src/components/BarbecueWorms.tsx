@@ -16,13 +16,21 @@ export const BarbecueWorms = () => {
         const index = barbecueWorms.findIndex((bw) => bw.value === value);
 
         if (index < 0)
-          return <span key={value} style={{ display: "inline-block" }}></span>;
+          return (
+            <span
+              key={value}
+              style={{ display: "inline-block", maxWidth: "6.25%" }}
+            ></span>
+          );
 
         return (
           <img
             key={value}
             src={mapWormValueToImgSrc(barbecueWorms[index].value)}
-            style={{ opacity: barbecueWorms[index].isDisabled ? 0.1 : 1 }}
+            style={{
+              opacity: barbecueWorms[index].isDisabled ? 0.1 : 1,
+              maxWidth: "6.25%",
+            }}
             alt={value.toString()}
           />
         );

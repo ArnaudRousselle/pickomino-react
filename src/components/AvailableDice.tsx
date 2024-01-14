@@ -4,7 +4,7 @@ import { mapDiceValueToImgSrc } from "../functions";
 
 export const AvailableDice = () => {
   const {
-    game: { availableDice },
+    game: { availableDice, currentStep },
     actions,
     play,
   } = useContext(PickominoContext);
@@ -16,6 +16,13 @@ export const AvailableDice = () => {
         const pickAction = actions.find(
           (a) => a.type === "chooseDiceValue" && a.chosenDiceValue === value
         );
+        const opacity =
+          currentStep.type === "playerTurn" &&
+          currentStep.subStep === "mustLaunchDiceOrTakeWorm"
+            ? 1
+            : pickAction
+            ? 1
+            : 0.5;
         return (
           <img
             key={id}
@@ -23,7 +30,7 @@ export const AvailableDice = () => {
             src={mapDiceValueToImgSrc(value)}
             alt={value.toString()}
             style={{
-              opacity: pickAction ? 1 : 0.5,
+              opacity: opacity,
               cursor: pickAction ? "pointer" : "not-allowed",
             }}
             onClick={() => {
