@@ -9,12 +9,13 @@ export const PlayerActions = () => {
       (a) =>
         a.type === "quitMyTurn" ||
         a.type === "takeWormFromBarbecueWorm" ||
-        a.type === "takeWormFromPlayer"
+        a.type === "takeWormFromPlayer" ||
+        a.type === "launchDice"
     )
     .map((a) => ({ text: a.text, onClick: () => play(a) }));
 
-  return availableActions.map((a) => (
-    <button type="button" onClick={a.onClick}>
+  return availableActions.map((a, i) => (
+    <button key={i} type="button" onClick={a.onClick}>
       {a.text}
     </button>
   ));

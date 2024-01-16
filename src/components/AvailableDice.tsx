@@ -8,7 +8,12 @@ export const AvailableDice = () => {
     actions,
     play,
   } = useContext(PickominoContext);
-  const launchDiceAction = actions.find((a) => a.type === "launchDice");
+  if (
+    currentStep.type !== "playerTurn" ||
+    currentStep.subStep !== "mustChooseDiceValue"
+  )
+    return null;
+
   return (
     <div>
       <h2>Dès disponibles</h2>
@@ -16,13 +21,6 @@ export const AvailableDice = () => {
         const pickAction = actions.find(
           (a) => a.type === "chooseDiceValue" && a.chosenDiceValue === value
         );
-        const opacity =
-          currentStep.type === "playerTurn" &&
-          currentStep.subStep === "mustLaunchDiceOrTakeWorm"
-            ? 1
-            : pickAction
-            ? 1
-            : 0.5;
         return (
           <img
             key={id}
@@ -30,7 +28,7 @@ export const AvailableDice = () => {
             src={mapDiceValueToImgSrc(value)}
             alt={value.toString()}
             style={{
-              opacity: opacity,
+              opacity: pickAction ? 1 : 0.5,
               cursor: pickAction ? "pointer" : "not-allowed",
             }}
             onClick={() => {
@@ -40,11 +38,6 @@ export const AvailableDice = () => {
           />
         );
       })}
-      {launchDiceAction && (
-        <button type="button" onClick={() => play(launchDiceAction)}>
-          {launchDiceAction.text}
-        </button>
-      )}
     </div>
   );
 };

@@ -6,11 +6,5 @@ export const Players = () => {
   const {
     game: { players },
   } = useContext(PickominoContext);
-  return (
-    <div>
-      {players.map((p) => (
-        <Player key={p.id} {...p} />
-      ))}
-    </div>
-  );
+  return players.map((p) => <Player key={p.id} {...p} />);
 };

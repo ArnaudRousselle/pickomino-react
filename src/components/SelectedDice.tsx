@@ -6,6 +6,9 @@ export const SelectedDice = () => {
   const {
     game: { selectedDice },
   } = useContext(PickominoContext);
+
+  if (selectedDice.length === 0) return null;
+
   return (
     <div>
       <h2>Dès sélectionnés</h2>
