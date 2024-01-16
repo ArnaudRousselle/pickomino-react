@@ -1,6 +1,7 @@
-import { Action, IPickominoGame } from ".";
+import { Action, IPickominoGame, PlayAction } from ".";
 
 export interface IPickominoContext {
   game: IPickominoGame;
-  play: React.Dispatch<Action>;
+  actions: PlayAction[];
+  play: (action: Action) => void;
 }

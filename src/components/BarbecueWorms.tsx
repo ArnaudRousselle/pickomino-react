@@ -10,29 +10,27 @@ export const BarbecueWorms = () => {
   const {
     game: { barbecueWorms },
   } = useContext(PickominoContext);
-  return (
-    <div>
-      {allValues.map((value) => {
-        const index = barbecueWorms.findIndex((bw) => bw.value === value);
+  return allValues.map((value) => {
+    const index = barbecueWorms.findIndex((bw) => bw.value === value);
 
-        if (index < 0)
-          return (
-            <span
-              key={value}
-              style={{ width: "48px", display: "inline-block" }}
-            ></span>
-          );
+    if (index < 0)
+      return (
+        <span
+          key={value}
+          style={{ display: "inline-block", width: "6.25%" }}
+        ></span>
+      );
 
-        return (
-          <img
-            key={value}
-            width="48px"
-            src={mapWormValueToImgSrc(barbecueWorms[index].value)}
-            style={{ opacity: barbecueWorms[index].isDisabled ? 0.1 : 1 }}
-            alt={value.toString()}
-          />
-        );
-      })}
-    </div>
-  );
+    return (
+      <img
+        key={value}
+        src={mapWormValueToImgSrc(barbecueWorms[index].value)}
+        style={{
+          opacity: barbecueWorms[index].isDisabled ? 0.1 : 1,
+          width: "6.25%",
+        }}
+        alt={value.toString()}
+      />
+    );
+  });
 };

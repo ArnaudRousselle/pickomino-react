@@ -1,15 +1,8 @@
 import { useReducer } from "react";
-import {
-  AvailableDice,
-  BarbecueWorms,
-  EndOfGameSummary,
-  Play,
-  Players,
-} from ".";
+import { BarbecueWorms, EndOfGameSummary, Players } from ".";
 import { defaultDice } from "../constants";
 import { PickominoContext } from "../contexts";
-import { pickominoGameReducer } from "../functions";
-import { SelectedDice } from "./SelectedDice";
+import { pickominoActionsCreator, pickominoGameReducer } from "../functions";
 
 export const Pickomino = () => {
   const [game, play] = useReducer(pickominoGameReducer, {
@@ -122,12 +115,15 @@ export const Pickomino = () => {
   });
 
   return (
-    <PickominoContext.Provider value={{ game, play }}>
-      <BarbecueWorms />
-      <Players />
-      <AvailableDice />
-      <SelectedDice />
-      <Play />
+    <PickominoContext.Provider
+      value={{ game, actions: pickominoActionsCreator(game), play }}
+    >
+      <div style={{ height: "25%" }}>
+        <BarbecueWorms />
+      </div>
+      <div>
+        <Players />
+      </div>
       <EndOfGameSummary />
     </PickominoContext.Provider>
   );
