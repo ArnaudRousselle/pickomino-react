@@ -3,7 +3,6 @@ import { AvailableDice, BarbecueWorms, EndOfGameSummary, Players } from ".";
 import { defaultDice } from "../constants";
 import { PickominoContext } from "../contexts";
 import { pickominoActionsCreator, pickominoGameReducer } from "../functions";
-import { SelectedDice } from "./SelectedDice";
 
 export const Pickomino = () => {
   const [game, play] = useReducer(pickominoGameReducer, {
@@ -124,7 +123,6 @@ export const Pickomino = () => {
       </div>
       <Players />
       <AvailableDice />
-      <SelectedDice />
       <EndOfGameSummary />
     </PickominoContext.Provider>
   );

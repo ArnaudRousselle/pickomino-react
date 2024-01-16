@@ -19,7 +19,7 @@ export const BarbecueWorms = () => {
           return (
             <span
               key={value}
-              style={{ display: "inline-block", maxWidth: "6.25%" }}
+              style={{ display: "inline-block", width: "6.25%" }}
             ></span>
           );
 
@@ -29,7 +29,7 @@ export const BarbecueWorms = () => {
             src={mapWormValueToImgSrc(barbecueWorms[index].value)}
             style={{
               opacity: barbecueWorms[index].isDisabled ? 0.1 : 1,
-              maxWidth: "6.25%",
+              width: "6.25%",
             }}
             alt={value.toString()}
           />
