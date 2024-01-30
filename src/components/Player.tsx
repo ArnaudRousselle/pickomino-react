@@ -3,6 +3,7 @@ import { AvailableDice } from ".";
 import { PickominoContext } from "../contexts";
 import { PlayerType } from "../types";
 import { PlayerActions } from "./PlayerActions";
+import { PlayerStack } from "./PlayerStack";
 import { SelectedDice } from "./SelectedDice";
 
 export const Player = ({ id, name, barbecueWormsStack }: PlayerType) => {
@@ -16,20 +17,20 @@ export const Player = ({ id, name, barbecueWormsStack }: PlayerType) => {
     <div
       style={{
         display: "inline-block",
+        height: "100%",
         width: 100 / players.length + "%",
-        verticalAlign: "top",
         textAlign: "center",
+        verticalAlign: "top",
       }}
     >
-      <p style={{ fontWeight: myTurn ? "bold" : "normal" }}>{name}</p>
-
-      {barbecueWormsStack.length > 0
-        ? " --> " +
-          barbecueWormsStack[0].value +
-          " +" +
-          (barbecueWormsStack.length > 1 ? barbecueWormsStack.length - 1 : 0)
-        : ""}
-
+      <PlayerStack barbecueWormsStack={barbecueWormsStack} />
+      <p
+        style={{
+          fontWeight: myTurn ? "bold" : "normal",
+        }}
+      >
+        {name}
+      </p>
       {myTurn && (
         <>
           <PlayerActions />

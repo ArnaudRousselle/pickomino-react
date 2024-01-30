@@ -121,7 +121,7 @@ export const Pickomino = () => {
       <div style={{ height: "25%" }}>
         <BarbecueWorms />
       </div>
-      <div>
+      <div style={{ height: "40%" }}>
         <Players />
       </div>
       <EndOfGameSummary />
