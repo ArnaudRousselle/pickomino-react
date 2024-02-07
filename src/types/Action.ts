@@ -1,4 +1,4 @@
-import { DiceValue } from ".";
+import { DiceValue, IPickominoGame } from ".";
 
 export type Action =
   | {
@@ -7,4 +7,8 @@ export type Action =
   | { type: "chooseDiceValue"; chosenDiceValue: DiceValue }
   | { type: "takeWormFromBarbecueWorm" }
   | { type: "takeWormFromPlayer" }
-  | { type: "quitMyTurn" };
+  | { type: "quitMyTurn" }
+  | {
+      type: "loadGame";
+      game: IPickominoGame;
+    };

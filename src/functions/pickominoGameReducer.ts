@@ -3,9 +3,13 @@ import { defaultDice } from "../constants";
 import { Action, IPickominoGame } from "../types";
 
 export function pickominoGameReducer(
-  game: IPickominoGame,
+  game: IPickominoGame | null,
   action: Action
-): IPickominoGame {
+): IPickominoGame | null {
+  if (action.type === "loadGame") {
+    return action.game;
+  } else if (!game) return null;
+
   switch (action.type) {
     case "launchDice": {
       if (
@@ -244,6 +248,8 @@ export function pickominoGameReducer(
         selectedDice: [],
       };
     }
+
+    default:
+      return null;
   }
-  return game;
 }
