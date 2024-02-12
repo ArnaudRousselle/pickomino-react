@@ -1,6 +1,7 @@
 import { useReducer, useState } from "react";
 import { BarbecueWorms, EndOfGameSummary, Players } from ".";
 import { PickominoContext } from "../contexts";
+import { GameMenuContext } from "../contexts/GameMenuContext";
 import { pickominoActionsCreator, pickominoGameReducer } from "../functions";
 import { GameMenu } from "./menus";
 
@@ -11,11 +12,15 @@ export const Pickomino = () => {
 
   if (showMenu)
     return (
-      <GameMenu
-        currentGame={game}
-        onLoadGame={(g) => play({ type: "loadGame", game: g })}
-        onClose={() => setShowMenu(false)}
-      />
+      <GameMenuContext.Provider
+        value={{
+          currentGame: game,
+          onLoadGame: (g) => play({ type: "loadGame", game: g }),
+          onClose: () => setShowMenu(false),
+        }}
+      >
+        <GameMenu />
+      </GameMenuContext.Provider>
     );
 
   if (!game) return null;

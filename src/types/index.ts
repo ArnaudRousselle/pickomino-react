@@ -2,6 +2,7 @@ export * from "./Action";
 export * from "./BarbecueWorm";
 export * from "./Dice";
 export * from "./DiceValue";
+export * from "./IGameMenuContext";
 export * from "./IPickominoContext";
 export * from "./IPickominoGame";
 export * from "./PlayAction";
