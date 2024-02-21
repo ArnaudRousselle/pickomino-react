@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { HomeMenu } from "./HomeMenu";
-import { NewGameMenu } from "./NewGameMenu";
+import { HomeMenu, LoadMenu, NewGameMenu, SaveMenu } from "./";
 import { MenuScreen } from "./types";
 
 export const GameMenu = () => {
@@ -16,7 +15,9 @@ export const GameMenu = () => {
     case MenuScreen.New:
       return <NewGameMenu onCancel={onCancel} />;
     case MenuScreen.Load:
+      return <LoadMenu onCancel={onCancel} />;
     case MenuScreen.Save:
+      return <SaveMenu onCancel={onCancel} />;
     default:
       return null;
   }

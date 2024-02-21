@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { defaultDice } from "../../constants";
 import { GameMenuContext } from "../../contexts/GameMenuContext";
 
@@ -8,25 +8,16 @@ interface IProps {
 
 export const NewGameMenu = ({ onCancel }: IProps) => {
   const { onLoadGame, onClose } = useContext(GameMenuContext);
+  const [players, setPlayers] = useState<string[]>(["Joueur 1", "Joueur 2"]);
   const startNewGame = () => {
+    if (players.length < 2) return;
+
     onLoadGame({
-      players: [
-        {
-          id: 1,
-          name: "Player 1",
-          barbecueWormsStack: [],
-        },
-        {
-          id: 2,
-          name: "Player 2",
-          barbecueWormsStack: [],
-        },
-        {
-          id: 3,
-          name: "Player 3",
-          barbecueWormsStack: [],
-        },
-      ],
+      players: players.map((name, index) => ({
+        id: index + 1,
+        name,
+        barbecueWormsStack: [],
+      })),
       barbecueWorms: [
         {
           value: 21,
@@ -119,14 +110,48 @@ export const NewGameMenu = ({ onCancel }: IProps) => {
     });
     onClose();
   };
+
+  const addPlayer = () => {
+    setPlayers((players) => [...players, "Joueur " + (players.length + 1)]);
+  };
+
   return (
     <div>
-      NOUVEAU{" "}
+      Nouvelle partie
+      {players.map((name, index) => (
+        <Fragment key={index}>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) =>
+              setPlayers((players) => [
+                ...players.slice(0, index),
+                e.target.value,
+                ...players.slice(index + 1),
+              ])
+            }
+          />
+          <button
+            type="button"
+            onClick={() =>
+              setPlayers((players) => [
+                ...players.slice(0, index),
+                ...players.slice(index + 1),
+              ])
+            }
+          >
+            -
+          </button>
+        </Fragment>
+      ))}
+      <button type="button" onClick={addPlayer}>
+        +
+      </button>
       <button type="button" onClick={startNewGame}>
         Démarrer
       </button>
       <button type="button" onClick={onCancel}>
-        Annuler
+        Retour
       </button>
     </div>
   );
