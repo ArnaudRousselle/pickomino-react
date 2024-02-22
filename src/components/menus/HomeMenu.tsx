@@ -18,10 +18,17 @@ export const HomeMenu = ({ setSelectedScreen }: IProps) => {
         Charger une partie
       </button>
       <br />
-      <button type="button" onClick={() => setSelectedScreen(MenuScreen.Save)}>
-        Sauvegarde la partie
-      </button>
-      <br />
+      {currentGame && (
+        <>
+          <button
+            type="button"
+            onClick={() => setSelectedScreen(MenuScreen.Save)}
+          >
+            Sauvegarde la partie
+          </button>
+          <br />
+        </>
+      )}
       {currentGame && (
         <button type="button" onClick={onClose}>
           Fermer le menu

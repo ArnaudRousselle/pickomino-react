@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { PickominoContext } from "../../contexts";
 import { GameMenuContext } from "../../contexts/GameMenuContext";
 import { useSaves } from "../../hooks";
 
@@ -8,13 +7,12 @@ interface IProps {
 }
 
 export const SaveMenu = ({ onCancel }: IProps) => {
-  const { onClose } = useContext(GameMenuContext);
+  const { onClose, currentGame } = useContext(GameMenuContext);
   const { saves, saveGame } = useSaves();
 
-  const { game } = useContext(PickominoContext);
-
   const save = (id?: number) => {
-    saveGame(game, id);
+    if (!currentGame) return;
+    saveGame(currentGame, id);
     onClose();
   };
 
