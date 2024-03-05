@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { defaultDice } from "../../constants";
 import { GameMenuContext } from "../../contexts/GameMenuContext";
 
@@ -116,10 +116,10 @@ export const NewGameMenu = ({ onCancel }: IProps) => {
   };
 
   return (
-    <div>
-      Nouvelle partie
+    <div className="menu">
+      <h1>Nouvelle partie</h1>
       {players.map((name, index) => (
-        <Fragment key={index}>
+        <div key={index}>
           <input
             type="text"
             value={name}
@@ -140,16 +140,18 @@ export const NewGameMenu = ({ onCancel }: IProps) => {
               ])
             }
           >
-            -
+            Supprimer
           </button>
-        </Fragment>
+        </div>
       ))}
       <button type="button" onClick={addPlayer}>
-        +
+        Ajouter un joueur
       </button>
+      <br />
       <button type="button" onClick={startNewGame}>
         Démarrer
       </button>
+      <br />
       <button type="button" onClick={onCancel}>
         Retour
       </button>

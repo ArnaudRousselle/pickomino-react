@@ -8,7 +8,7 @@ export const EndOfGameSummary = () => {
   if (currentStep.type !== "endOfGame") return null;
 
   return (
-    <>
+    <div style={{ textAlign: "center" }}>
       <h1>Fin de partie !</h1>
       <h2>Classement</h2>
       {players
@@ -23,6 +23,6 @@ export const EndOfGameSummary = () => {
             {p.name} : {p.totalPoints} point{p.totalPoints >= 2 ? "s" : ""}
           </p>
         ))}
-    </>
+    </div>
   );
 };

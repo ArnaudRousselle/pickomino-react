@@ -9,8 +9,13 @@ interface IProps {
 export const HomeMenu = ({ setSelectedScreen }: IProps) => {
   const { currentGame, onClose } = useContext(GameMenuContext);
   return (
-    <div>
-      <button type="button" onClick={() => setSelectedScreen(MenuScreen.New)}>
+    <div className="menu">
+      <h1>Menu principal</h1>
+      <button
+        type="button"
+        onClick={() => setSelectedScreen(MenuScreen.New)}
+        style={{ textAlign: "center" }}
+      >
         Nouvelle partie
       </button>
       <br />

@@ -16,12 +16,14 @@ export const LoadMenu = ({ onCancel }: IProps) => {
     onClose();
   };
 
+  console.log(saves);
+
   return (
-    <div>
-      Charger{" "}
+    <div className="menu">
+      <h1>Charger</h1>
       {saves.map((s) => (
         <div key={s.id}>
-          {s.id}
+          {new Date(s.date).toLocaleString("fr")}
           <button type="button" onClick={() => load(s.game)}>
             X
           </button>

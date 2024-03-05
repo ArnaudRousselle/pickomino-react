@@ -17,19 +17,20 @@ export const SaveMenu = ({ onCancel }: IProps) => {
   };
 
   return (
-    <div>
-      Sauvegarder{" "}
+    <div className="menu">
+      <h1>Sauvegarder</h1>
       {saves.map((s) => (
         <div key={s.id}>
           {s.id}
           <button type="button" onClick={() => save(s.id)}>
-            X
+            écraser
           </button>
         </div>
       ))}
       <button type="button" onClick={() => save()}>
-        +
+        Nouvelle sauvegarde
       </button>
+      <br />
       <button type="button" onClick={onCancel}>
         Retour
       </button>
